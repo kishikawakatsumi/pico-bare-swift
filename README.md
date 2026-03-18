@@ -10,6 +10,7 @@ Each example is a standalone SwiftPM project that builds a `.elf` firmware for t
 |---------|-------------|
 | [01-blink-minimal](01-blink-minimal) | LED blink with busy-wait delay. The absolute minimum bare-metal setup. |
 | [02-blink-clock](02-blink-clock) | LED blink with XOSC, PLL (125MHz), and SysTick timer for precise timing. |
+| [03-uart-print](03-uart-print) | UART debug output via Debug Probe. Prints messages to a serial console. |
 
 ## Requirements
 
@@ -35,27 +36,69 @@ Or directly with `swift build`:
 swift build --triple armv6m-none-none-eabi -c release --toolset toolset.json
 ```
 
-The output ELF is at `.build/armv6m-none-none-eabi/release/Application`.
+The output ELF is at `.build/armv6m-none-none-eabi/release/Application`. Running `make` or `make release` also generates `.build/firmware.uf2`.
 
 ## Flash
 
-Convert to UF2 and copy to the Pico (in BOOTSEL mode):
+### Option 1: UF2 (no debug probe needed)
+
+Hold the **BOOTSEL** button on the Pico while plugging it into USB. It appears as a USB drive. Copy the UF2 file:
 
 ```
-swift ../Tools/elf2uf2.swift .build/armv6m-none-none-eabi/release/Application .build/firmware.uf2
 cp .build/firmware.uf2 /Volumes/RPI-RP2/
 ```
 
+To generate the UF2 manually:
+
+```
+swift ../Tools/elf2uf2.swift .build/armv6m-none-none-eabi/release/Application .build/firmware.uf2
+```
+
 The `Tools/elf2uf2.swift` script is included in this repository — no external tools required.
+
+### Option 2: Debug probe (flash + debug)
+
+See the [Debug with VS Code](#debug-with-vs-code) section below.
+
+## Hardware Setup
+
+### 01-blink-minimal, 02-blink-clock
+
+No extra wiring required. Uses the on-board LED (GPIO25).
+
+### 03-uart-print
+
+Connect a [Raspberry Pi Debug Probe](https://www.raspberrypi.com/products/debug-probe/) (or a second Pico running [Picoprobe](https://github.com/raspberrypi/picoprobe) firmware) to the target Pico:
+
+| Debug Probe | Target Pico | Description |
+|-------------|-------------|-------------|
+| UART TX     | GP1 (pin 2) | Debug Probe transmits to Pico RX |
+| UART RX     | GP0 (pin 1) | Pico TX to Debug Probe receive |
+| UART GND    | GND (pin 3) | Common ground |
+
+Open a serial console at **115200 baud** to see output:
+
+```
+screen /dev/tty.usbmodem* 115200
+```
+
+(Press `Ctrl-A` then `K` to exit `screen`.)
+
+> **Tip**: The UART pins can be changed in `Board.swift`. For example, to use the other side of the board: `UART.initialize(tx: 16, rx: 17)`.
 
 ## Debug with VS Code
 
 ### Hardware
 
-Connect a debug probe to the target Pico's SWD pins (SWCLK, SWDIO, GND). Either of these works:
+Connect the debug probe's SWD pins to the target Pico:
 
-- [Raspberry Pi Debug Probe](https://www.raspberrypi.com/products/debug-probe/)
-- A second Raspberry Pi Pico running [Picoprobe](https://github.com/raspberrypi/picoprobe) firmware
+| Debug Probe | Target Pico | Description |
+|-------------|-------------|-------------|
+| SWCLK       | SWCLK       | Serial Wire Clock |
+| SWDIO       | SWDIO       | Serial Wire Data |
+| GND         | GND         | Common ground |
+
+The SWD pins are on the bottom of the Pico board, next to the USB connector. The Debug Probe can provide both SWD (debug) and UART (serial) connections simultaneously.
 
 ### Software
 
@@ -102,7 +145,7 @@ Sources/Application/
     Resets.swift          # Peripheral reset controller
     ...                   # Additional peripherals per example
   Support/
-    Boot2.swift           # RP2040 second stage bootloader (from Pico SDK)
+    Boot2.swift           # RP2040 second stage bootloader binary (from Pico SDK)
     VectorTable.swift     # ARM Cortex-M0+ vector table and handlers
     Startup.swift         # Memory section initialization (.data, .bss)
     RuntimeStubs.swift    # Heap allocator, atomics, memcpy/memset
