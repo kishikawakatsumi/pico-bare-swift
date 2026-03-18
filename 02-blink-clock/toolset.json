@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0",
+  "swiftCompiler": {
+    "extraCLIOptions": [
+      "-enable-experimental-feature",
+      "Embedded",
+      "-enable-experimental-feature",
+      "Extern",
+      "-wmo",
+      "-Osize",
+      "-Xfrontend",
+      "-disable-stack-protector",
+      "-Xclang-linker",
+      "-fuse-ld=lld",
+      "-Xclang-linker",
+      "-nostdlib"
+    ]
+  },
+  "cCompiler": {
+    "extraCLIOptions": ["-ffreestanding", "-fno-PIC"]
+  },
+  "linker": {
+    "extraCLIOptions": [
+      "-T",
+      "linker/memmap.ld",
+      "--gc-sections"
+    ]
+  }
+}
