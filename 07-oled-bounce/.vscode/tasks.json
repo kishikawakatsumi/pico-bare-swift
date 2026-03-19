@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build",
+      "type": "shell",
+      "command": "swift",
+      "args": [
+        "build",
+        "--triple", "armv6m-none-none-eabi",
+        "--toolset", "toolset.json"
+      ],
+      "options": {
+        "env": {
+          "TOOLCHAINS": "swift"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}

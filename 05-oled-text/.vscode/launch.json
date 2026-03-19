@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug",
+      "type": "cortex-debug",
+      "request": "launch",
+      "servertype": "openocd",
+      "cwd": "${workspaceFolder}",
+      "executable": "${workspaceFolder}/.build/armv6m-none-none-eabi/debug/Application",
+      "armToolchainPath": "",
+      "configFiles": ["interface/cmsis-dap.cfg", "target/rp2040.cfg"],
+      "openOCDLaunchCommands": ["adapter speed 5000"],
+      "searchDir": [],
+      "svdFile": "${workspaceFolder}/rp2040.svd",
+      "preLaunchTask": "Build"
+    }
+  ]
+}

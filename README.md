@@ -11,6 +11,10 @@ Each example is a standalone SwiftPM project that builds a `.elf` firmware for t
 | [01-blink-minimal](01-blink-minimal) | LED blink with busy-wait delay. The absolute minimum bare-metal setup. |
 | [02-blink-clock](02-blink-clock) | LED blink with XOSC, PLL (125MHz), and SysTick timer for precise timing. |
 | [03-uart-print](03-uart-print) | UART debug output via Debug Probe. Prints messages to a serial console. |
+| [04-pwm-fade](04-pwm-fade) | Smooth LED fade in/out using PWM for brightness control. |
+| [05-oled-text](05-oled-text) | SSD1306 OLED display over I2C. Shows text and a live uptime counter. |
+| [06-oled-pattern](06-oled-pattern) | Display test patterns: stripes, checkerboard, gradient, and font sample. |
+| [07-oled-bounce](07-oled-bounce) | Bouncing ball animation on the OLED display. |
 
 ## Requirements
 
