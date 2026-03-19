@@ -15,6 +15,9 @@ Each example is a standalone SwiftPM project that builds a `.elf` firmware for t
 | [05-oled-text](05-oled-text) | SSD1306 OLED display over I2C. Shows text and a live uptime counter. |
 | [06-oled-pattern](06-oled-pattern) | Display test patterns: stripes, checkerboard, gradient, and font sample. |
 | [07-oled-bounce](07-oled-bounce) | Bouncing ball animation on the OLED display. |
+| [08-button-input](08-button-input) | GPIO button input with a Famicom-style controller displayed on the OLED. |
+
+> **Note**: These examples are designed for the **Raspberry Pi Pico** (not Pico W). On the Pico W, the on-board LED is connected to the CYW43439 WiFi chip (WL_GPIO0), not to RP2040 GPIO25. Controlling it requires SPI communication with the WiFi chip and loading its firmware — a much more complex setup that these examples do not cover.
 
 ## Requirements
 
