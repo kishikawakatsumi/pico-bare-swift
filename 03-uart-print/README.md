@@ -2,9 +2,6 @@
 
 Prints debug messages to a serial console via UART. Connect a Debug Probe to see the output.
 
-<!-- TODO: Replace with actual image/video URL -->
-![Demo](https://github.com/user-attachments/assets/PLACEHOLDER)
-
 ## What you'll learn
 
 - UART0 initialization (baud rate, 8N1)
