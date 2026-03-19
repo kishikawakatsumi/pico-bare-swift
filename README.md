@@ -64,25 +64,11 @@ See the [Debug with VS Code](#debug-with-vs-code) section below.
 
 ### 01-blink-minimal, 02-blink-clock
 
-No extra wiring required. Uses the on-board LED (GPIO25).
+No extra wiring needed. Uses the on-board LED (GPIO25).
 
 ### 03-uart-print
 
-Connect a [Raspberry Pi Debug Probe](https://www.raspberrypi.com/products/debug-probe/) (or a second Pico running [Picoprobe](https://github.com/raspberrypi/picoprobe) firmware) to the target Pico:
-
-| Debug Probe | Target Pico | Description |
-|-------------|-------------|-------------|
-| UART TX     | GP1 (pin 2) | Debug Probe transmits to Pico RX |
-| UART RX     | GP0 (pin 1) | Pico TX to Debug Probe receive |
-| UART GND    | GND (pin 3) | Common ground |
-
-Open a serial console at **115200 baud** to see output:
-
-```
-screen /dev/tty.usbmodem* 115200
-```
-
-(Press `Ctrl-A` then `K` to exit `screen`.)
+Requires a [Debug Probe](#debug-with-vs-code) connected to the target Pico's UART pins (GP0/GP1). See the wiring details in the [debug section](#debug-with-vs-code) below.
 
 > **Tip**: The UART pins can be changed in `Board.swift`. For example, to use the other side of the board: `UART.initialize(tx: 16, rx: 17)`.
 
@@ -90,7 +76,13 @@ screen /dev/tty.usbmodem* 115200
 
 ### Hardware
 
-Connect the debug probe's SWD pins to the target Pico:
+The [Raspberry Pi Debug Probe](https://www.raspberrypi.com/products/debug-probe/) is a small USB device that connects to a Pico's debug and serial pins. It lets you flash firmware, set breakpoints, and view UART output from your computer — without unplugging cables each time.
+
+![Debug Probe connected to Pico](https://www.raspberrypi.com/documentation/microcontrollers/images/labelled-wiring.jpg)
+
+Alternatively, a second Raspberry Pi Pico running [Picoprobe](https://github.com/raspberrypi/picoprobe) firmware can serve the same purpose.
+
+**SWD** (debug and flash) — connect to the 3-pin debug header on the bottom of the Pico, next to the USB connector:
 
 | Debug Probe | Target Pico | Description |
 |-------------|-------------|-------------|
@@ -98,7 +90,25 @@ Connect the debug probe's SWD pins to the target Pico:
 | SWDIO       | SWDIO       | Serial Wire Data |
 | GND         | GND         | Common ground |
 
-The SWD pins are on the bottom of the Pico board, next to the USB connector. The Debug Probe can provide both SWD (debug) and UART (serial) connections simultaneously.
+**UART** (serial output for 03-uart-print) — connect to the GPIO header:
+
+| Debug Probe | Target Pico | Description |
+|-------------|-------------|-------------|
+| UART TX     | GP1 (pin 2) | Debug Probe transmits to Pico RX |
+| UART RX     | GP0 (pin 1) | Pico TX to Debug Probe receive |
+| UART GND    | GND (pin 3) | Common ground |
+
+![Debug Probe wiring diagram](https://raw.githubusercontent.com/raspberrypi/documentation/master/documentation/asciidoc/microcontrollers/debug-probe/images/wiring.png)
+
+> Images from [Raspberry Pi Debug Probe documentation](https://www.raspberrypi.com/documentation/microcontrollers/debug-probe.html) (CC BY-SA 4.0)
+
+To view UART output, open a serial console at **115200 baud**:
+
+```
+screen /dev/tty.usbmodem* 115200
+```
+
+(Press `Ctrl-A` then `K` to exit `screen`.)
 
 ### Software
 
