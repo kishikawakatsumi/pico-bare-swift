@@ -167,6 +167,10 @@ Sources/Application/
     RuntimeStubs.swift    # Heap allocator, atomics, memcpy/memset
 ```
 
+## Support
+
+If you find this project useful, consider [sponsoring](https://github.com/sponsors/kishikawakatsumi) to support continued development.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
