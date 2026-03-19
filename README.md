@@ -78,7 +78,9 @@ Requires a [Debug Probe](#debug-with-vs-code) connected to the target Pico's UAR
 
 The [Raspberry Pi Debug Probe](https://www.raspberrypi.com/products/debug-probe/) is a small USB device that connects to a Pico's debug and serial pins. It lets you flash firmware, set breakpoints, and view UART output from your computer — without unplugging cables each time.
 
-![Debug Probe connected to Pico](https://www.raspberrypi.com/documentation/microcontrollers/images/labelled-wiring.jpg)
+![Debug Probe connected to Pico](https://github.com/user-attachments/assets/295dbefb-3eb5-4a79-9275-e6b3bd2a419b)
+
+> Images from [Raspberry Pi Debug Probe documentation](https://www.raspberrypi.com/documentation/microcontrollers/debug-probe.html) (CC BY-SA 4.0)
 
 Alternatively, a second Raspberry Pi Pico running [Picoprobe](https://github.com/raspberrypi/picoprobe) firmware can serve the same purpose.
 
@@ -98,7 +100,7 @@ Alternatively, a second Raspberry Pi Pico running [Picoprobe](https://github.com
 | UART RX     | GP0 (pin 1) | Pico TX to Debug Probe receive |
 | UART GND    | GND (pin 3) | Common ground |
 
-![Debug Probe wiring diagram](https://raw.githubusercontent.com/raspberrypi/documentation/master/documentation/asciidoc/microcontrollers/debug-probe/images/wiring.png)
+![Debug Probe wiring diagram](https://github.com/user-attachments/assets/df016347-3410-4b1e-b370-dbba05b4fd70)
 
 > Images from [Raspberry Pi Debug Probe documentation](https://www.raspberrypi.com/documentation/microcontrollers/debug-probe.html) (CC BY-SA 4.0)
 
