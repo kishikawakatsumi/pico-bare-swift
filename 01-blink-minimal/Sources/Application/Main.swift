@@ -5,7 +5,7 @@ struct Application {
 
     while true {
       board.led.toggle()
-      board.sleep(iterations: 1_000_000)
+      board.sleep(iterations: 500_000)
     }
   }
 }
