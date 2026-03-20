@@ -25,6 +25,9 @@ enum I2C {
   // Data command bits
   private static let stopBit: UInt32 = 1 << 9
 
+  // Cached target address to avoid redundant disable/enable cycles
+  nonisolated(unsafe) private static var currentTarget: UInt8 = 0xFF
+
   /// Initializes I2C0 in master mode at 400kHz (assuming 125MHz clk_sys).
   ///
   /// - Parameters:
@@ -41,6 +44,7 @@ enum I2C {
 
     // Disable I2C before configuration
     enable.store(0)
+    while enableStatus.load() & 1 != 0 {}
 
     // Master mode, fast speed (400kHz), restart enable, slave disable
     control.store(0x0165)
@@ -55,8 +59,31 @@ enum I2C {
     // SDA hold time (~300ns at 125MHz)
     sdaHold.store(38)
 
-    // Enable I2C
+    // Leave disabled. The first call to setTarget() will enable the controller
+    // after writing IC_TAR. IC_TAR must only be written while IC_ENABLE=0.
+    currentTarget = 0xFF
+  }
+
+  /// Sets the target address. IC_TAR can only be written while disabled,
+  /// so this disables the controller, writes IC_TAR, then re-enables.
+  /// Skips if the address hasn't changed.
+  private static func setTarget(_ address: UInt8) {
+    if address == currentTarget { return }
+
+    enable.store(0)
+    while enableStatus.load() & 1 != 0 {}
+
+    targetAddress.store(UInt32(address))
+    currentTarget = address
+
     enable.store(1)
+  }
+
+  /// Clears any pending TX abort condition.
+  private static func clearAbort() {
+    if abortSource.load() != 0 {
+      _ = clearTxAbort.load()
+    }
   }
 
   /// Waits for TX FIFO space. Returns false on timeout.
@@ -65,13 +92,7 @@ enum I2C {
     while status.load() & txFifoNotFull == 0 {
       waited &+= 1
       if waited > 100_000 {
-        // Clear abort if any
-        if abortSource.load() != 0 {
-          _ = clearTxAbort.load()
-          enable.store(0)
-          while enableStatus.load() & 1 != 0 {}
-          enable.store(1)
-        }
+        clearAbort()
         return false
       }
     }
@@ -84,16 +105,19 @@ enum I2C {
     while status.load() & masterActivity != 0 {}
   }
 
-  /// Sends a single byte without STOP (part of a multi-byte transaction).
+  /// Begins a new transaction to the specified address.
+  /// Sends a single byte without STOP.
   static func writeByte(address: UInt8, _ byte: UInt8) {
-    targetAddress.store(UInt32(address))
+    setTarget(address)
+    clearAbort()
     if !waitTxReady() { return }
     dataCommand.store(UInt32(byte))
   }
 
-  /// Sends a single byte with STOP (ends the transaction).
+  /// Begins a new transaction and sends a single byte with STOP.
   static func writeByteWithStop(address: UInt8, _ byte: UInt8) {
-    targetAddress.store(UInt32(address))
+    setTarget(address)
+    clearAbort()
     if !waitTxReady() { return }
     dataCommand.store(UInt32(byte) | stopBit)
     waitIdle()
