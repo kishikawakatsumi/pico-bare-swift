@@ -7,6 +7,9 @@ struct Board {
   init() {
     Clocks.initialize()
     SysTick.initialize()
+    Resets.reset(.i2c0)
+    Resets.reset(.uart0)
+    Resets.reset(.pwm)
     Resets.unreset(.ioBank0)
     Resets.unreset(.padsBank0)
     UART.initialize(tx: 0, rx: 1)
@@ -56,13 +59,18 @@ struct Controller {
   let pinB: UInt32 = 7
 
   func initialize() {
-    // Configure all button pins as inputs with pull-ups
-    let pins = [pinUp, pinDown, pinLeft, pinRight, pinA, pinB]
-    for pin in pins {
-      IOBank.setFunction(pin, .sio)
-      SIO.disableOutput(pin)  // Input mode (don't drive the pin)
-      PadsBank.enablePullUp(pin)
-    }
+    configureButton(pinUp)
+    configureButton(pinDown)
+    configureButton(pinLeft)
+    configureButton(pinRight)
+    configureButton(pinA)
+    configureButton(pinB)
+  }
+
+  private func configureButton(_ pin: UInt32) {
+    PadsBank.store(pin, 0x4A)
+    IOBank.setFunction(pin, .sio)
+    SIO.disableOutput(pin)
   }
 
   var isUpPressed: Bool { SIO.isLow(pinUp) }

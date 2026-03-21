@@ -39,8 +39,8 @@ enum I2C {
     // Configure GPIO pins for I2C with pull-ups
     IOBank.setFunction(sda, .i2c)
     IOBank.setFunction(scl, .i2c)
-    PadsBank.enablePullUp(sda)
-    PadsBank.enablePullUp(scl)
+    PadsBank.store(sda, 0x4A)
+    PadsBank.store(scl, 0x4A)
 
     // Disable I2C before configuration
     enable.store(0)

@@ -41,6 +41,10 @@ enum PadsBank {
     Register(address: base + 0x04 + pin &* 4)
   }
 
+  static func store(_ pin: UInt32, _ value: UInt32) {
+    pad(pin).store(value)
+  }
+
   static func read(_ pin: UInt32) -> UInt32 {
     pad(pin).load()
   }

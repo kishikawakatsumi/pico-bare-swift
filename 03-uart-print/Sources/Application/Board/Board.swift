@@ -5,6 +5,7 @@ struct Board {
   init() {
     Clocks.initialize()
     SysTick.initialize()
+    Resets.reset(.uart0)
     Resets.unreset(.ioBank0)
     Resets.unreset(.padsBank0)
     UART.initialize(tx: 0, rx: 1)
