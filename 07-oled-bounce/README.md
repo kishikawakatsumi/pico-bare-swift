@@ -13,7 +13,7 @@ A ball bounces around the OLED display, reflecting off all four edges. Demonstra
 
 ## Wiring
 
-![Wiring diagram](https://github.com/user-attachments/assets/322da340-24b0-4728-b386-96d940168c1b)
+![Wiring diagram](https://github.com/user-attachments/assets/3f4e80be-114b-4254-8dcf-7ebfb7c030d1)
 
 | Pico | SSD1306 |
 | ---- | ------- |
