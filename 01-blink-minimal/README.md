@@ -2,7 +2,7 @@
 
 The absolute minimum bare-metal setup. Blinks the on-board LED using a busy-wait loop — no clock configuration, no timer, no external hardware.
 
-![Demo](https://github.com/user-attachments/assets/f299776c-f6b8-4e04-bf2a-f4d470662fcb)
+![Demo](https://github.com/user-attachments/assets/f31747b0-8f59-4a07-9b5d-78130d22834b)
 
 ## What you'll learn
 
