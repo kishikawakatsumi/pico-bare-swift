@@ -1,4 +1,4 @@
-ENTRY(Reset_Handler)
+ENTRY(resetHandler)
 
 MEMORY {
     ROM (rx)  : ORIGIN = 0x10000000, LENGTH = 2048K

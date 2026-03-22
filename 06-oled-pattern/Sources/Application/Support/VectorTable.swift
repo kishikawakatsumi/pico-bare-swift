@@ -1,11 +1,11 @@
 /// Default exception handler that halts the processor.
-@c(Default_Handler)
+@c
 func defaultHandler() {
   while true {}  // Infinite loop prevents returning to corrupted state
 }
 
 /// Entry point called by the hardware on reset (via the vector table).
-@c(Reset_Handler)
+@c
 func resetHandler() {
   initializeMemorySections()
   Application.main()
