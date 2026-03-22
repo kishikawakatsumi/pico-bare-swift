@@ -2,7 +2,7 @@
 
 Smooth LED fade in and out using PWM. The on-board LED gradually brightens and dims instead of blinking on/off.
 
-![Demo](https://github.com/user-attachments/assets/1d9450eb-4f60-47e5-8414-baa49492ba19)
+![Demo](https://github.com/user-attachments/assets/c50262cc-9c80-4897-a94c-cf871798a0b3)
 
 ## What you'll learn
 
