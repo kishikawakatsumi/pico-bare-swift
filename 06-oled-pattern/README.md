@@ -2,7 +2,7 @@
 
 Displays test patterns on the SSD1306 OLED: solid fill, vertical/horizontal stripes, checkerboard, gradient, border, and a font sample.
 
-![Demo](https://github.com/user-attachments/assets/8d586f45-ddce-4c92-89ae-80e8a4dc6c70)
+![Demo](https://github.com/user-attachments/assets/ef81467c-cd8d-425e-a7de-9f9d5339668c)
 
 ## What you'll learn
 
