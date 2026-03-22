@@ -2,7 +2,7 @@
 
 LED blink with precise timing. Configures the RP2040 clock system (XOSC → PLL → 125MHz) and uses the ARM SysTick timer for accurate delays.
 
-![Demo](https://github.com/user-attachments/assets/2bbdff4d-3135-4e06-943e-0e4fcb91bf77)
+![Demo](https://github.com/user-attachments/assets/ab796d58-1f49-4950-b715-d3eaf771fe99)
 
 ## What you'll learn
 
