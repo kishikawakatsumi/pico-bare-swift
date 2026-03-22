@@ -2,7 +2,7 @@
 
 Displays text and a live uptime counter on a 128x64 SSD1306 OLED display over I2C.
 
-![Demo](https://github.com/user-attachments/assets/2f13f2a3-4786-41ae-b269-9ca041b0cd57)
+![Demo](https://github.com/user-attachments/assets/e2c5009f-71c1-4cae-9731-34b1f6aad5a8)
 
 ## What you'll learn
 
