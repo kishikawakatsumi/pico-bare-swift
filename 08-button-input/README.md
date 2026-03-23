@@ -12,7 +12,7 @@ A Famicom-style controller is drawn on the OLED display. Press physical buttons 
 
 ## Wiring
 
-![Wiring diagram](https://github.com/user-attachments/assets/35197fcf-4fa3-4771-a2d7-0c75354cb555)
+![Wiring diagram](https://github.com/user-attachments/assets/76b05567-5b13-4e52-8465-382bee9cb200)
 
 ### OLED Display (SSD1306)
 
