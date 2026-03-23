@@ -2,7 +2,7 @@
 
 A Famicom-style controller is drawn on the OLED display. Press physical buttons connected to GPIO pins and see them react on screen in real time.
 
-![Demo](https://github.com/user-attachments/assets/975a5b12-6a11-4641-9264-3447be5e5f6b)
+![Demo](https://github.com/user-attachments/assets/d85161ca-7250-4091-9f71-707087fb9259)
 
 ## What you'll learn
 
