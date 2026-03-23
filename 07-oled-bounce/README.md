@@ -2,7 +2,7 @@
 
 A ball bounces around the OLED display, reflecting off all four edges. Demonstrates real-time animation with framebuffer clearing, circle drawing, and periodic display updates.
 
-![Demo](https://github.com/user-attachments/assets/91a9d76b-af2c-4332-8009-acacf2d1ef6f)
+![Demo](https://github.com/user-attachments/assets/7e718b70-d5c7-46c4-83d8-b84b9dc0974e)
 
 ## What you'll learn
 
