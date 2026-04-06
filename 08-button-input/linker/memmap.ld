@@ -42,8 +42,8 @@ SECTIONS {
         *(.got.plt)
     } > ROM
 
-    __data_org = .;
-    .data : AT(__data_org) {
+    __data_origin = .;
+    .data : AT(__data_origin) {
         __data_start = .;
         *(.data)
         *(.data.*)

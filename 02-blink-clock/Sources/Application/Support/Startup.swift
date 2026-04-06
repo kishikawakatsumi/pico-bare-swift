@@ -1,8 +1,8 @@
 // Linker-defined section boundary symbols (see linker/memmap.ld).
 // Their addresses — not values — represent the section boundaries.
-// Equivalent to `extern char __data_org;` in C, where `&__data_org`
+// Equivalent to `extern char __data_origin;` in C, where `&__data_origin`
 // gives the address.
-@_extern(c, "__data_org") nonisolated(unsafe) var __data_org: UInt8
+@_extern(c, "__data_origin") nonisolated(unsafe) var __data_origin: UInt8
 @_extern(c, "__data_start") nonisolated(unsafe) var __data_start: UInt8
 @_extern(c, "__data_end") nonisolated(unsafe) var __data_end: UInt8
 @_extern(c, "__bss_end") nonisolated(unsafe) var __bss_end: UInt8
@@ -19,7 +19,7 @@ func linkerSymbolAddress(_ symbol: inout UInt8) -> UInt {
 ///
 /// Must run before any Swift code that uses global variables.
 func initializeMemorySections() {
-  var src = UnsafeMutablePointer<UInt32>(bitPattern: linkerSymbolAddress(&__data_org))!
+  var src = UnsafeMutablePointer<UInt32>(bitPattern: linkerSymbolAddress(&__data_origin))!
   var dst = UnsafeMutablePointer<UInt32>(bitPattern: linkerSymbolAddress(&__data_start))!
   let dataEnd = UnsafeMutablePointer<UInt32>(bitPattern: linkerSymbolAddress(&__data_end))!
   let bssEnd = UnsafeMutablePointer<UInt32>(bitPattern: linkerSymbolAddress(&__bss_end))!
