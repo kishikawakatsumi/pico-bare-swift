@@ -21,13 +21,13 @@ Each example is a standalone SwiftPM project that builds a `.elf` firmware for t
 
 ## Requirements
 
-- **Swift toolchain**: A recent `main` development snapshot from [swift.org](https://www.swift.org/install/)
+- **Swift toolchain**: Swift 6.3 or later from [swift.org](https://www.swift.org/install/)
 - **[swiftly](https://github.com/swiftlang/swiftly)** (recommended): The `.swift-version` file in each project selects the correct toolchain automatically
 
 Install with swiftly:
 
 ```
-swiftly install main-snapshot
+swiftly install 6.3
 ```
 
 ## Build
