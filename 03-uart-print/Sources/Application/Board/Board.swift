@@ -31,7 +31,7 @@ struct LED {
     SIO.disableOutput(pin)
     SIO.clearOutput(pin)
 
-    // Configure pad: enable output drive, disable input
+    // Configure pad: enable output drive (OD=0) and input receiver (IE=1)
     let padValue = PadsBank.read(pin)
     PadsBank.xor(pin, (padValue ^ 0x40) & 0xC0)
 

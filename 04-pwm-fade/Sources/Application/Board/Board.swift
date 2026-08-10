@@ -29,7 +29,7 @@ struct LED {
   private let pin: UInt32 = 25
 
   func initialize() {
-    // Configure pad: enable output drive, disable input
+    // Configure pad: enable output drive (OD=0) and input receiver (IE=1)
     let padValue = PadsBank.read(pin)
     PadsBank.xor(pin, (padValue ^ 0x40) & 0xC0)
 
